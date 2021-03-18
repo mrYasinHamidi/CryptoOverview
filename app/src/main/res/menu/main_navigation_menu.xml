@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeDestination"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/text_label_home" />
+    <item
+        android:id="@+id/watchListDestination"
+        android:enabled="true"
+        android:icon="@drawable/ic_watch_list"
+        android:title="@string/text_label_watch_list" />
+    <item
+        android:id="@+id/newsDestination"
+        android:enabled="true"
+        android:icon="@drawable/ic_news"
+        android:title="@string/text_label_news" />
+    <item
+        android:id="@+id/walletDestination"
+        android:enabled="true"
+        android:icon="@drawable/ic_wallet"
+        android:title="@string/text_label_wallet" />
+</menu>

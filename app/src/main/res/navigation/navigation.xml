@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeFragment"
+    app:startDestination="@id/homeDestination">
+
+    <fragment
+        android:id="@+id/homeDestination"
+        android:name="com.yasin.cryptooverview.destinations.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeDestination_to_detail"
+            app:destination="@id/detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDestination"
+        android:name="com.yasin.cryptooverview.destinations.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/watchListDestination"
+        android:name="com.yasin.cryptooverview.destinations.WatchListFragment"
+        android:label="fragment_watch_list"
+        tools:layout="@layout/fragment_watch_list" />
+    <fragment
+        android:id="@+id/walletDestination"
+        android:name="com.yasin.cryptooverview.destinations.WalletFragment"
+        android:label="fragment_wallet"
+        tools:layout="@layout/fragment_wallet" />
+    <fragment
+        android:id="@+id/detail"
+        android:name="com.yasin.cryptooverview.destinations.DetailFragment"
+        android:label="Detail" >
+        <argument
+            android:name="CryptoCurrency"
+            app:argType="com.yasin.cryptooverview.models.CryptoCurrency" />
+    </fragment>
+</navigation>
