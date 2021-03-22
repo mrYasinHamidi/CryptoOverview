@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -49,7 +50,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
-        ViewCompat.setTransitionName(binding.layoutMainDetail,"yasin")
+        ViewCompat.setTransitionName(binding.layoutMainDetail, "yasin")
         binding.viewModel = viewModel
         viewModel.cryptoCurrency.value = args.CryptoCurrency
         binding.lifecycleOwner = this
@@ -58,5 +59,9 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.detailCloseIcon.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }

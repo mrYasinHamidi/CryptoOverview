@@ -14,19 +14,24 @@ class CryptoConstants {
 
 enum class CryptoInterval(val interval: String) { H1("1h"), D1("1d"), D7("7d"), D30("30d") }
 enum class CryptoConvert(val convert: String) { USD("USD"), EUR("EUR") }
+enum class RequestStatus { Loading, Complete , Error }
 
 fun List<CryptoApiResponse>.arrayOfCryptoCurrencyTables(): Array<CryptoCurrencyTable> {
     return map {
         CryptoCurrencyTable(
             rank = it.rank?.toInt(),
-            name = it.name?:"",
-            symbol =  it.symbol?:"",
-            price = it.price?:"",
-            high = it.logoUrl?:"",
-            logoUrl = it.logoUrl?:"",
-            marketCap = it.marketCap?:"",
-            maxSupply = it.maxSupply?:"",
-            circulatingSupply = it.circulatingSupply?:""
+            name = it.name ?: "",
+            symbol = it.symbol ?: "",
+            price = it.price ?: "",
+            high = it.logoUrl ?: "",
+            logoUrl = it.logoUrl ?: "",
+            marketCap = it.marketCap ?: "",
+            maxSupply = it.maxSupply ?: "",
+            circulatingSupply = it.circulatingSupply ?: "",
+            priceChangeDaily = it.d1?.priceChange ?: "",
+            priceChangeWeakly = it.d7?.priceChange ?: "",
+            priceChangeMonthly = it.d30?.priceChange ?: "",
+            priceChangeYearly = it.d365?.priceChange ?: ""
         )
     }.toTypedArray()
 }
@@ -34,15 +39,19 @@ fun List<CryptoApiResponse>.arrayOfCryptoCurrencyTables(): Array<CryptoCurrencyT
 fun List<CryptoCurrencyTable>.listOfCryptoCurrencies(): List<CryptoCurrency> {
     return map {
         CryptoCurrency(
-            rank = it.rank?:0,
+            rank = it.rank ?: 0,
             name = it.name,
-            symbol =  it.symbol,
+            symbol = it.symbol,
             price = it.price,
             high = it.logoUrl,
             logoUrl = it.logoUrl,
             marketCap = it.marketCap,
             maxSupply = it.maxSupply,
-            circulatingSupply = it.circulatingSupply
+            circulatingSupply = it.circulatingSupply,
+            priceChangeDaily = it.priceChangeDaily,
+            priceChangeWeakly = it.priceChangeWeakly,
+            priceChangeMonthly = it.priceChangeMonthly,
+            priceChangeYearly = it.priceChangeYearly
         )
     }
 }

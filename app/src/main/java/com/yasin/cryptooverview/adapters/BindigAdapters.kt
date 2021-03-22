@@ -1,10 +1,16 @@
 package com.yasin.cryptooverview.adapters
 
+import android.graphics.Color
 import android.graphics.drawable.PictureDrawable
+import android.opengl.Visibility
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.android.material.snackbar.Snackbar
+import com.yasin.cryptooverview.RequestStatus
 import com.yasin.cryptooverview.svgRender.GlideApp
 import com.yasin.cryptooverview.svgRender.SvgSoftwareLayerSetter
 
@@ -21,7 +27,6 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
                 .miniThumb()
                 .load(imgUrl)
                 .into(imgView)
-
         else
 
             GlideApp.with(imgView.context)
@@ -30,14 +35,39 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
                 .into(imgView)
 
 
-
 }
 
-@BindingAdapter("layoutFullscreen")
-fun View.bindLayoutFullscreen(previousFullscreen: Boolean, fullscreen: Boolean) {
-    if (previousFullscreen != fullscreen && fullscreen) {
-        systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+@BindingAdapter("setColoredPrice")
+fun TextView.bindText(value: String) {
+    if (value.isNotEmpty()) {
+
+        val price = value.toDouble()
+
+        if (price > 0) {
+            setTextColor(Color.GREEN)
+        } else if (price < 0) {
+            setTextColor(Color.RED)
+        }
+        text = value
+    }
+}
+
+@BindingAdapter("progressStatus")
+fun ProgressBar.bindProgressBar(status: RequestStatus) {
+    visibility = when (status) {
+        RequestStatus.Loading -> View.VISIBLE
+        RequestStatus.Error -> {
+            Snackbar.make(this, "Connection Failed\nWe are on offline cache :)", 4000).show()
+            View.GONE
+        }
+        RequestStatus.Complete -> View.GONE
+    }
+}
+
+@BindingAdapter("refreshStatus")
+fun TextView.bindRefreshText(status: RequestStatus) {
+    visibility = when (status) {
+        RequestStatus.Error -> View.VISIBLE
+        else -> View.GONE
     }
 }

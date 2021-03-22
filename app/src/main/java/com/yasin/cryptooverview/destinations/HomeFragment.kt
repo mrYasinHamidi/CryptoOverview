@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.Hold
 import com.google.android.material.transition.MaterialElevationScale
 import com.yasin.cryptooverview.R
@@ -49,6 +50,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -60,7 +63,6 @@ class HomeFragment : Fragment() {
 
 
         val adapter = CryptoRecyclerViewAdapter(CryptoRecyclerViewOnClick {
-//            findNavController().navigate(HomeFragmentDirections.actionHomeDestinationToDetail(it))
             createOnClickListener(it)
         })
 
@@ -70,6 +72,7 @@ class HomeFragment : Fragment() {
         viewModel.currencies.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
+
 
     }
 }

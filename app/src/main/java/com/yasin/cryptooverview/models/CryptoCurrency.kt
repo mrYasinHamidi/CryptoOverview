@@ -13,5 +13,9 @@ data class CryptoCurrency(
     val logoUrl: String,
     val marketCap: String,
     val maxSupply: String,
-    val circulatingSupply: String
+    val circulatingSupply: String,
+    val priceChangeDaily: String,
+    val priceChangeWeakly: String,
+    val priceChangeMonthly: String,
+    val priceChangeYearly: String
 ):Parcelable

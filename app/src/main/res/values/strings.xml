@@ -7,4 +7,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="price_change">%d(%f)</string>
+
+    <string name="market_cap">Market Cap :</string>
+    <string name="volume_24h">Volume 24H :</string>
+    <string name="max_supply">Max Supply :</string>
+    <string name="circulating_supply">Circulating Supply :</string>
+    <string name="change_1d">Change 1D :</string>
+    <string name="change_1w">Change 1W :</string>
+    <string name="change_1m">Change 1M :</string>
+    <string name="change_1y">Change 1Y :</string>
+    <string name="try_again">Please Tap To Try Again</string>
 </resources>
