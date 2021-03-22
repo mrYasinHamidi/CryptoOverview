@@ -57,7 +57,10 @@ fun ProgressBar.bindProgressBar(status: RequestStatus) {
     visibility = when (status) {
         RequestStatus.Loading -> View.VISIBLE
         RequestStatus.Error -> {
-            Snackbar.make(this, "Connection Failed\nWe are on offline cache :)", 4000).show()
+            try {
+                Snackbar.make(this, "Connection Failed\nWe are on offline cache :)", 4000).show()
+            } catch (e: Exception) {
+            }
             View.GONE
         }
         RequestStatus.Complete -> View.GONE
