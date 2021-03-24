@@ -12,13 +12,24 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Qualifier
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
 class NetworkModule {
+    @Qualifier
+    annotation class CoinCap
+
+    @Qualifier
+    annotation class Nomics
 
     @Provides
-    fun provideBaseUrl() = CryptoConstants.BASE_URL
+    @Nomics
+    fun provideBaseUrlForNomicsApi() = CryptoConstants.NOMICS_BASE_URL
+
+    @Provides
+    @CoinCap
+    fun provideBaseUrlForCoinCapApi() = CryptoConstants.COIN_CAP_BASE_URL
 
     @ActivityRetainedScoped
     @Provides
@@ -26,16 +37,32 @@ class NetworkModule {
         .add(KotlinJsonAdapterFactory())
         .build()
 
+    @Nomics
     @ActivityRetainedScoped
     @Provides
-    fun provideRetrofit(moshi: Moshi, BASE_URL: String): Retrofit = Retrofit.Builder()
+    fun provideRetrofitForNomicsApi(moshi: Moshi,@Nomics BASE_URL: String): Retrofit = Retrofit.Builder()
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .baseUrl(BASE_URL)
         .build()
 
+    @CoinCap
+    @ActivityRetainedScoped
+    @Provides
+    fun provideRetrofitForCoinCapApi(moshi: Moshi,@CoinCap BASE_URL: String): Retrofit = Retrofit.Builder()
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .baseUrl(BASE_URL)
+        .build()
+
+    @Nomics
     @Provides
     @ActivityRetainedScoped
-    fun provideApiService(retrofit: Retrofit) = retrofit.create(CryptoApiService::class.java)
+    fun provideApiServiceForNomics(@Nomics retrofit: Retrofit) = retrofit.create(CryptoApiService::class.java)
+
+    @CoinCap
+    @Provides
+    @ActivityRetainedScoped
+    fun provideApiServiceForCoinCap(@CoinCap retrofit: Retrofit) = retrofit.create(CryptoApiService::class.java)
 
 }

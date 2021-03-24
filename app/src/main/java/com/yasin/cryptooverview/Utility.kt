@@ -6,15 +6,22 @@ import com.yasin.cryptooverview.network.CryptoApiResponse
 
 class CryptoConstants {
     companion object {
-        const val BASE_URL = "https://api.nomics.com/v1/"
+        const val NOMICS_BASE_URL = "https://api.nomics.com/v1/"
+        const val COIN_CAP_BASE_URL = "https://api.coincap.io/v2/"
         const val API_KEY = "98d7dff1d3aec8baf0bfe575fd80a8a0"
     }
 }
 //"https://api.nomics.com/v1/currencies/ticker?page=1&per-page=1000&interval=1D&convert=USD&status=active&key=98d7dff1d3aec8baf0bfe575fd80a8a0"
 
-enum class CryptoInterval(val interval: String) { H1("1h"), D1("1d"), D7("7d"), D30("30d") }
+enum class ChartDataInterval(val interval: String) {
+    M1("m1"), M5("m5"), M15("m15"),
+    M30("m30"), H1("h1"), H2("h2"),
+    H4("h4"), H8("h8"), H12("h12"),
+    D1("d1"), W1("w1")
+}
+
 enum class CryptoConvert(val convert: String) { USD("USD"), EUR("EUR") }
-enum class RequestStatus { Loading, Complete , Error }
+enum class RequestStatus { Loading, Complete, Error }
 
 fun List<CryptoApiResponse>.arrayOfCryptoCurrencyTables(): Array<CryptoCurrencyTable> {
     return map {

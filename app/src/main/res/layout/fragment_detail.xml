@@ -78,7 +78,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/detail_logo"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-                <com.github.mikephil.charting.charts.LineChart
+                <com.github.mikephil.charting.charts.CandleStickChart
                     android:id="@+id/detail_chart"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
