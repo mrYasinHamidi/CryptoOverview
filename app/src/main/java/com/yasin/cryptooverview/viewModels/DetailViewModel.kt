@@ -1,5 +1,6 @@
 package com.yasin.cryptooverview.viewModels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,31 +20,37 @@ class DetailViewModel @Inject constructor(private val repository: ChartRepositor
 
     val cryptoCurrency = MutableLiveData<CryptoCurrency>()
 
-    val _chartData = MutableLiveData<List<Candle>>()
+    private val _chartData = MutableLiveData<List<Candle>>()
     val chartData: LiveData<List<Candle>>
         get() = _chartData
 
-    val _requestStatus = MutableLiveData<RequestStatus>()
+    private val _requestStatus = MutableLiveData<RequestStatus>()
     val requestStatus: LiveData<RequestStatus>
         get() = _requestStatus
 
 
-//    init {
-//        getChartData()
-//    }
-
-    fun getChartData() {
+    fun getChartData(interval: ChartDataInterval) {
+        Log.i("aaaDetaiViewModel","getData")
+        _requestStatus.value = RequestStatus.Loading
         viewModelScope.launch {
             repository.getChartData(
                 "tether",
-                cryptoCurrency.value?.name?.toLowerCase()?.replace(" ","-")?:"",
+                cryptoCurrency.value?.name?.toLowerCase()?.replace(" ", "-") ?: "",
                 "binance",
-                ChartDataInterval.D1
+                interval
             ) { _requestStatus.postValue(it) }?.let {
                 _chartData.postValue(it)
             }
 
         }
     }
+
+    fun getCandle(x: Float) =
+        try {
+            _chartData.value?.get(x.toInt())
+        } catch (e: Exception) {
+            null
+        }
+
 
 }

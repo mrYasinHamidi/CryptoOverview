@@ -12,12 +12,15 @@
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/layout_main_detail"
+        style="@style/MainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,31 +30,32 @@
                 <ImageView
                     android:id="@+id/detail_logo"
                     imageUrl="@{viewModel.cryptoCurrency.logoUrl}"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_width="@dimen/logo_width_height"
+                    android:layout_height="@dimen/logo_width_height"
+                    android:layout_marginTop="@dimen/margin_between_objects"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/detail_name"
+                    style="@style/Header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="@dimen/margin_between_objects"
+                    android:layout_marginLeft="@dimen/margin_between_objects"
+                    android:layout_marginTop="2dp"
                     android:text="@{viewModel.cryptoCurrency.name}"
                     app:layout_constraintStart_toEndOf="@+id/detail_logo"
                     app:layout_constraintTop_toTopOf="@+id/detail_logo" />
 
                 <TextView
                     android:id="@+id/detail_symbol"
+                    style="@style/Header.SubHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="@dimen/margin_between_objects"
+                    android:layout_marginLeft="@dimen/margin_between_objects"
+                    android:layout_marginBottom="2dp"
                     android:text="@{viewModel.cryptoCurrency.symbol}"
                     app:layout_constraintBottom_toBottomOf="@+id/detail_logo"
                     app:layout_constraintStart_toEndOf="@+id/detail_logo" />
@@ -60,8 +64,8 @@
                     android:id="@+id/detail_close_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -70,181 +74,235 @@
 
                 <TextView
                     android:id="@+id/detail_price"
+                    style="@style/Header.SubHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
                     android:text="@{viewModel.cryptoCurrency.price}"
                     app:layout_constraintBottom_toBottomOf="@+id/detail_logo"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@+id/detail_close_icon" />
 
-                <com.github.mikephil.charting.charts.CandleStickChart
-                    android:id="@+id/detail_chart"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/detail_chart_Card"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    app:layout_constraintDimensionRatio="w,2:3"
+                    android:layout_marginTop="@dimen/margin_between_objects"
+                    android:elevation="16dp"
+                    app:cardCornerRadius="@dimen/chart_corner_radius"
+                    app:layout_constraintDimensionRatio="w,4:7"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_logo" />
+                    app:layout_constraintTop_toBottomOf="@+id/detail_logo">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <com.github.mikephil.charting.charts.CandleStickChart
+                            android:id="@+id/detail_chart"
+                            chartStatus="@{viewModel.requestStatus}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ProgressBar
+                            android:id="@+id/progressbar"
+                            chartProgressStatus="@{viewModel.requestStatus}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center" />
+                    </FrameLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/switcher_card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_between_objects"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="@dimen/shape_corner_radius"
+                    app:layout_constraintLeft_toLeftOf="@id/detail_chart_Card"
+                    app:layout_constraintRight_toRightOf="@id/detail_chart_Card"
+                    app:layout_constraintTop_toBottomOf="@id/detail_chart_Card">
+
+                    <com.yasin.cryptooverview.customs.Switcher
+                        android:id="@+id/switcher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+                </com.google.android.material.card.MaterialCardView>
 
                 <TextView
                     android:id="@+id/textView4"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginLeft="@dimen/text_left_right_margin"
+                    android:layout_marginTop="@dimen/text_top_margin"
                     android:text="@string/market_cap"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_chart" />
+                    app:layout_constraintTop_toBottomOf="@+id/switcher_card" />
 
                 <TextView
                     android:id="@+id/textView5"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginLeft="@dimen/text_left_right_margin"
+                    android:layout_marginTop="@dimen/text_top_margin"
                     android:text="@string/max_supply"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
                 <TextView
                     android:id="@+id/textView6"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginLeft="@dimen/text_left_right_margin"
+                    android:layout_marginTop="@dimen/text_top_margin"
                     android:text="@string/circulating_supply"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
                 <TextView
                     android:id="@+id/textView7"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginLeft="@dimen/text_left_right_margin"
+                    android:layout_marginTop="@dimen/text_top_margin"
                     android:text="@string/change_1d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
                 <TextView
                     android:id="@+id/textView8"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginLeft="@dimen/text_left_right_margin"
+                    android:layout_marginTop="@dimen/text_top_margin"
                     android:text="@string/change_1w"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <TextView
                     android:id="@+id/textView9"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginLeft="@dimen/text_left_right_margin"
+                    android:layout_marginTop="@dimen/text_top_margin"
                     android:text="@string/change_1m"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
                 <TextView
                     android:id="@+id/textView10"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginLeft="@dimen/text_left_right_margin"
+                    android:layout_marginTop="@dimen/text_top_margin"
                     android:text="@string/change_1y"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
                 <TextView
                     android:id="@+id/textView11"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="@dimen/text_top_margin"
+                    android:layout_marginRight="@dimen/text_left_right_margin"
                     android:text="@{viewModel.cryptoCurrency.marketCap}"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_chart" />
+                    app:layout_constraintTop_toBottomOf="@+id/switcher_card" />
 
                 <TextView
                     android:id="@+id/textView12"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="@dimen/text_top_margin"
+                    android:layout_marginRight="@dimen/text_left_right_margin"
                     android:text="@{viewModel.cryptoCurrency.circulatingSupply}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
                 <TextView
                     android:id="@+id/textView13"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="@dimen/text_top_margin"
+                    android:layout_marginRight="@dimen/text_left_right_margin"
                     android:text="@{viewModel.cryptoCurrency.maxSupply}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
                 <TextView
                     android:id="@+id/textView14"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeDaily}"
+                    android:layout_marginTop="@dimen/text_top_margin"
+                    android:layout_marginRight="@dimen/text_left_right_margin"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView12"
+                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeDaily}" />
 
                 <TextView
                     android:id="@+id/textView15"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeWeakly}"
+                    android:layout_marginTop="@dimen/text_top_margin"
+                    android:layout_marginRight="@dimen/text_left_right_margin"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView14"
+                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeWeakly}" />
 
                 <TextView
                     android:id="@+id/textView16"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeMonthly}"
+                    android:layout_marginTop="@dimen/text_top_margin"
+                    android:layout_marginRight="@dimen/text_left_right_margin"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView15"
+                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeMonthly}" />
 
                 <TextView
                     android:id="@+id/textView17"
+                    style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeYearly}"
+                    android:layout_marginTop="@dimen/text_top_margin"
+                    android:layout_marginRight="@dimen/text_left_right_margin"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView16"
+                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeYearly}" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_between_objects"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/detail_close_icon"
+                    app:layout_constraintEnd_toStartOf="@+id/detail_close_icon"
+                    app:layout_constraintTop_toTopOf="@+id/detail_close_icon"
+                    app:srcCompat="@drawable/ic_addchart" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

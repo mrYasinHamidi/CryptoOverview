@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/switcher_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/switcher_background">
+
+        <TextView
+            android:id="@+id/switcher_1h"
+            style="@style/SwitcherButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1h" />
+
+        <TextView
+            android:id="@+id/switcher_2h"
+            style="@style/SwitcherButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2h" />
+
+        <TextView
+            android:id="@+id/switcher_4h"
+            style="@style/SwitcherButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="4h" />
+
+        <TextView
+            android:id="@+id/switcher_8h"
+            style="@style/SwitcherButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="8h" />
+
+        <TextView
+            android:id="@+id/switcher_1d"
+            style="@style/SwitcherButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1d" />
+
+        <TextView
+            android:id="@+id/switcher_1w"
+            style="@style/SwitcherButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1w" />
+
+    </LinearLayout>
+</layout>

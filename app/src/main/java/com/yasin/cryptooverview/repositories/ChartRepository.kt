@@ -34,7 +34,7 @@ class ChartRepository @Inject constructor(
                 status(RequestStatus.Complete)
             } catch (e: Exception) {
                 status(RequestStatus.Error)
-                Log.i("aaa",e.message.toString())
+                Log.i("aaaChartRepository",e.message.toString())
             }
             return@withContext chartData
         }

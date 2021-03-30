@@ -62,3 +62,4 @@ fun List<CryptoCurrencyTable>.listOfCryptoCurrencies(): List<CryptoCurrency> {
         )
     }
 }
+

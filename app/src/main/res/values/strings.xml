@@ -7,6 +7,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="price_change">%d(%f)</string>
+    <string name="refresh_text">last update %s</string>
 
     <string name="market_cap">Market Cap :</string>
     <string name="volume_24h">Volume 24H :</string>

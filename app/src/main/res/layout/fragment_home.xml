@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E6FBFBFB"
+        style="@style/MainLayout"
         android:orientation="vertical">
 
         <TextView
@@ -22,13 +22,20 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:onClick="@{()->viewModel.getData()}"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:paddingBottom="0dp"
             android:text="@string/try_again"
             android:textColor="#555555"
             android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            setLastUpdateText="@{viewModel.status}"
+            android:layout_gravity="center_horizontal"
+            android:textSize="10sp"
+            android:text="last update 20 hour ago"/>
 
         <ProgressBar
             progressStatus="@{viewModel.status}"

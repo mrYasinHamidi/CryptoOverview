@@ -20,4 +20,24 @@
 
     <style name="ThemeOverlay.App.BottomNavigationView" parent="">
     </style>
+
+    <style name="MainLayout">
+        <item name="android:paddingLeft">@dimen/padding_right_left</item>
+        <item name="android:paddingRight">@dimen/padding_right_left</item>
+        <item name="android:background">@color/MainBackground</item>
+    </style>
+
+    <style name="Header" parent="TextAppearance.MaterialComponents.Headline6"/>
+    <style name="Header.SubHeader" parent="TextAppearance.MaterialComponents.Subtitle2"/>
+    <style name="Body" parent="TextAppearance.MaterialComponents.Body1"/>
+    <style name="SwitcherButton" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingRight">6dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
 </resources>

@@ -18,4 +18,9 @@ data class Candle(
     val period: Long?,
     @Json(name = "volume")
     val volume: String?
-)
+){
+    override fun toString(): String {
+//        return "open : $open high : $high low : $low close : $close"
+        return String.format("open : %.2f high : %.2f low : %.2f close : %.2f",open?.toFloat(),high?.toFloat(),low?.toFloat(),close?.toFloat(),)
+    }
+}
