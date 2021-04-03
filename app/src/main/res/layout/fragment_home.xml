@@ -11,12 +11,13 @@
     </data>
 
     <LinearLayout
+        style="@style/MainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/MainLayout"
         android:orientation="vertical">
 
         <TextView
+            style="@style/Header"
             refreshStatus="@{viewModel.status}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,16 +27,14 @@
             android:onClick="@{()->viewModel.getData()}"
             android:paddingTop="8dp"
             android:paddingBottom="0dp"
-            android:text="@string/try_again"
-            android:textColor="#555555"
-            android:textSize="20sp" />
+            android:text="@string/try_again" />
+
         <TextView
+            style="@style/Caption"
+            setLastUpdateText="@{viewModel.status}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            setLastUpdateText="@{viewModel.status}"
-            android:layout_gravity="center_horizontal"
-            android:textSize="10sp"
-            android:text="last update 20 hour ago"/>
+            android:layout_gravity="center_horizontal" />
 
         <ProgressBar
             progressStatus="@{viewModel.status}"

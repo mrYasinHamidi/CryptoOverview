@@ -1,6 +1,8 @@
 package com.yasin.cryptooverview
 
+import com.github.mikephil.charting.data.CandleEntry
 import com.yasin.cryptooverview.database.CryptoCurrencyTable
+import com.yasin.cryptooverview.models.Candle
 import com.yasin.cryptooverview.models.CryptoCurrency
 import com.yasin.cryptooverview.network.CryptoApiResponse
 
@@ -62,4 +64,25 @@ fun List<CryptoCurrencyTable>.listOfCryptoCurrencies(): List<CryptoCurrency> {
         )
     }
 }
+
+fun <E> List<E>.getRange(range: IntProgression): MutableList<E> {
+    val a = mutableListOf<E>()
+
+    for ((i, j) in this.withIndex())
+        if (i in range)
+            a.add(j)
+
+    return a
+}
+
+fun List<Candle>.toCandleEntry() = if (isNotEmpty()) mapIndexed { index, candle ->
+    CandleEntry(
+        index.toFloat(),
+        candle.high?.toFloat() ?: 0F,
+        candle.low?.toFloat() ?: 0F,
+        candle.open?.toFloat() ?: 0F,
+        candle.close?.toFloat() ?: 0F
+    )
+} else null
+
 

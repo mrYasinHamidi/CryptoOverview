@@ -29,8 +29,10 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.yasin.cryptooverview.ChartDataInterval
 import com.yasin.cryptooverview.R
 import com.yasin.cryptooverview.databinding.FragmentDetailBinding
+import com.yasin.cryptooverview.getRange
 import com.yasin.cryptooverview.listeners.SwitcherItemsClickListener
 import com.yasin.cryptooverview.models.Candle
+import com.yasin.cryptooverview.toCandleEntry
 import com.yasin.cryptooverview.viewModels.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -51,6 +53,8 @@ class DetailFragment : Fragment() {
             duration = 300L
             scrimColor = Color.TRANSPARENT
             setAllContainerColors(Color.TRANSPARENT)
+
+            viewModel.cryptoCurrency.value = args.CryptoCurrency
         }
 
     }
@@ -62,13 +66,12 @@ class DetailFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
 
-        activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navigation)?.visibility = View.GONE
+//        activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navigation)?.visibility =
+//            View.GONE
 
         ViewCompat.setTransitionName(binding.layoutMainDetail, "yasin")
 
         binding.viewModel = viewModel
-
-        viewModel.cryptoCurrency.value = args.CryptoCurrency
 
         binding.lifecycleOwner = this
 
@@ -82,7 +85,9 @@ class DetailFragment : Fragment() {
 
         chartConfig(chart)
 
-        viewModel.getChartData(ChartDataInterval.D1)
+        if (viewModel.chartData.value == null) {
+            viewModel.getChartData(ChartDataInterval.D1)
+        }
 
         binding.switcher.addSwitcherItemClickListener(
             SwitcherItemsClickListener(
@@ -98,18 +103,24 @@ class DetailFragment : Fragment() {
         binding.detailCloseIcon.setOnClickListener {
             findNavController().navigateUp()
         }
-        viewModel.chartData.observe(viewLifecycleOwner, Observer {
+        binding.detailChart.setOnClickListener {
+            val d = DetailFragmentDirections.actionDetailToChartFragment(
+                viewModel.chartData.value?.toTypedArray() ?: arrayOf()
+            )
+            findNavController().navigate(d)
+        }
+        viewModel.chartData.observe(viewLifecycleOwner, Observer { candels ->
 
-            val candleEntries = it.toCandleEntry()
-
-            chart.setChartData(candleEntries, it.lastIndex downTo it.lastIndex - 30)
+            candels.toCandleEntry()?.let {
+                chart.setChartData(it, candels.lastIndex downTo candels.lastIndex - 30)
+            }
 
 
         })
     }
 
     private fun chartConfig(chart: CandleStickChart) {
-        chart.setBackgroundColor(Color.WHITE)
+        chart.setBackgroundColor(resources.getColor(R.color.MainItemsBackground))
 
         chart.description.isEnabled = true
 
@@ -178,28 +189,10 @@ class DetailFragment : Fragment() {
 
     }
 
-    private fun List<Candle>.toCandleEntry() = mapIndexed { index, candle ->
-        CandleEntry(
-            index.toFloat(),
-            candle.high?.toFloat() ?: 0F,
-            candle.low?.toFloat() ?: 0F,
-            candle.open?.toFloat() ?: 0F,
-            candle.close?.toFloat() ?: 0F
-        )
-    }
 
-    private fun <E> List<E>.getRange(range: IntProgression): MutableList<E> {
-        val a = mutableListOf<E>()
-
-        for ((i, j) in this.withIndex())
-            if (i in range)
-                a.add(j)
-
-        return a
-    }
-
-    override fun onStop() {
-        super.onStop()
-        activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navigation)?.visibility = View.VISIBLE
+    override fun onDestroy() {
+        super.onDestroy()
+//        activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navigation)?.visibility =
+//            View.VISIBLE
     }
 }

@@ -89,6 +89,7 @@
                     android:elevation="16dp"
                     app:cardCornerRadius="@dimen/chart_corner_radius"
                     app:layout_constraintDimensionRatio="w,4:7"
+                    app:cardBackgroundColor="@color/MainItemsBackground"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_logo">

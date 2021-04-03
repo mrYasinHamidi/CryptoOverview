@@ -29,11 +29,16 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         binding.mainBottomNavigation.setupWithNavController(navController)
 
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            if (destination.id == R.id.detail || destination.id == R.id.chartFragment)
+                binding.mainBottomNavigation.visibility = View.GONE
+            else
+                binding.mainBottomNavigation.visibility = View.VISIBLE
+
+        }
 
 
     }
-
-
 
 
 }

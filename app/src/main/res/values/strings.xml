@@ -18,4 +18,10 @@
     <string name="change_1m">Change 1M :</string>
     <string name="change_1y">Change 1Y :</string>
     <string name="try_again">Please Tap To Try Again</string>
+    <string name="H1">1h</string>
+    <string name="H2">2h</string>
+    <string name="H4">4h</string>
+    <string name="H8">8h</string>
+    <string name="D1">1d</string>
+    <string name="W1">1w</string>
 </resources>

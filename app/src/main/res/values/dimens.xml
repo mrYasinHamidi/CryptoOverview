@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    all layouts-->
+    <!--    all layouts-->
     <dimen name="padding_right_left">8dp</dimen>
-<!--    Switcher-->
-    <dimen name="shape_corner_radius" >15dp</dimen>
-<!--    fragment_detail-->
+    <!--    Switcher-->
+    <dimen name="shape_corner_radius">15dp</dimen>
+    <!--    fragment_detail-->
     <dimen name="logo_width_height">50dp</dimen>
     <dimen name="text_top_margin">24dp</dimen>
     <dimen name="text_left_right_margin">8dp</dimen>
-    <dimen name="chart_corner_radius" >30dp</dimen>
+    <dimen name="chart_corner_radius">30dp</dimen>
     <dimen name="margin_between_objects">12dp</dimen>
 
-
+    <!--    Main_list_item.xml-->
+    <dimen name="margin_between_list_item">4dp</dimen>
+    <dimen name="logo_margin">6dp</dimen>
 </resources>

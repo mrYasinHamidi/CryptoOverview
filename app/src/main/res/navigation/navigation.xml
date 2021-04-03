@@ -36,5 +36,16 @@
         <argument
             android:name="CryptoCurrency"
             app:argType="com.yasin.cryptooverview.models.CryptoCurrency" />
+        <action
+            android:id="@+id/action_detail_to_chartFragment"
+            app:destination="@id/chartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chartFragment"
+        android:name="com.yasin.cryptooverview.destinations.ChartFragment"
+        android:label="ChartFragment" >
+        <argument
+            android:name="Candels"
+            app:argType="com.yasin.cryptooverview.models.Candle[]" />
     </fragment>
 </navigation>

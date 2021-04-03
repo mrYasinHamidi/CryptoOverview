@@ -29,8 +29,8 @@ class DetailViewModel @Inject constructor(private val repository: ChartRepositor
         get() = _requestStatus
 
 
+
     fun getChartData(interval: ChartDataInterval) {
-        Log.i("aaaDetaiViewModel","getData")
         _requestStatus.value = RequestStatus.Loading
         viewModelScope.launch {
             repository.getChartData(

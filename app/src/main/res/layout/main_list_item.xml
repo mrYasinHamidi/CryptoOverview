@@ -10,73 +10,66 @@
             type="com.yasin.cryptooverview.models.CryptoCurrency" />
     </data>
 
-    <FrameLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/list_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-       >
+        android:layout_marginTop="@dimen/margin_between_list_item"
+        android:layout_marginBottom="@dimen/margin_between_list_item"
+        app:cardBackgroundColor="@color/MainItemsBackground">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/list_card_view"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="8dp"
-            app:cardCornerRadius="5dp">
+            android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/main_list_img"
+                imageUrl="@{cryptoCurrency.logoUrl}"
+                android:layout_width="@dimen/logo_width_height"
+                android:layout_height="@dimen/logo_width_height"
+                android:layout_marginStart="@dimen/logo_margin"
+                android:layout_marginLeft="@dimen/logo_margin"
+                android:layout_marginTop="@dimen/logo_margin"
+                android:layout_marginBottom="@dimen/logo_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
 
-                <ImageView
-                    android:id="@+id/main_list_img"
-                    imageUrl="@{cryptoCurrency.logoUrl}"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars" />
+            <TextView
+                android:id="@+id/main_list_tv_name"
+                style="@style/Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_between_objects"
+                android:layout_marginLeft="@dimen/margin_between_objects"
+                android:text="@{cryptoCurrency.name}"
+                app:layout_constraintStart_toEndOf="@+id/main_list_img"
+                app:layout_constraintTop_toTopOf="@+id/main_list_img" />
 
-                <TextView
-                    android:id="@+id/main_list_tv_name"
-                    style="@style/Header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:text="@{cryptoCurrency.name}"
-                    app:layout_constraintStart_toEndOf="@+id/main_list_img"
-                    app:layout_constraintTop_toTopOf="@+id/main_list_img" />
+            <TextView
+                android:id="@+id/main_list_tv_symbol"
+                style="@style/Header.SubHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_between_objects"
+                android:layout_marginLeft="@dimen/margin_between_objects"
+                android:text="@{cryptoCurrency.symbol}"
+                app:layout_constraintBottom_toBottomOf="@+id/main_list_img"
+                app:layout_constraintStart_toEndOf="@+id/main_list_img" />
 
-                <TextView
-                    android:id="@+id/main_list_tv_symbol"
-                    style="@style/Header.SubHeader"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:text="@{cryptoCurrency.symbol}"
-                    app:layout_constraintBottom_toBottomOf="@+id/main_list_img"
-                    app:layout_constraintStart_toEndOf="@+id/main_list_img" />
-
-                <TextView
-                    android:id="@+id/main_list_tv_price"
-                    style="@style/Header.SubHeader"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="@{cryptoCurrency.price}"
-                    app:layout_constraintBottom_toBottomOf="@+id/main_list_img"
-                    app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/main_list_tv_price"
+                style="@style/Header.SubHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_between_objects"
+                android:layout_marginRight="@dimen/margin_between_objects"
+                android:text="@{cryptoCurrency.price}"
+                app:layout_constraintBottom_toBottomOf="@+id/main_list_img"
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
-    </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout><!--    android:text="@{@string/price_change(cryptoCurrency.priceChange,cryptoCurrency.priceChangePercent)}"-->

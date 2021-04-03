@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="1h" />
+            android:text="@string/H1" />
 
         <TextView
             android:id="@+id/switcher_2h"
@@ -26,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="2h" />
+            android:text="@string/H2" />
 
         <TextView
             android:id="@+id/switcher_4h"
@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="4h" />
+            android:text="@string/H4" />
 
         <TextView
             android:id="@+id/switcher_8h"
@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="8h" />
+            android:text="@string/H8" />
 
         <TextView
             android:id="@+id/switcher_1d"
@@ -50,7 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="1d" />
+            android:text="@string/D1" />
 
         <TextView
             android:id="@+id/switcher_1w"
@@ -58,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="1w" />
+            android:text="@string/W1" />
 
     </LinearLayout>
 </layout>

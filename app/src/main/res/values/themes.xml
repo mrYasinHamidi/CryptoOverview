@@ -2,15 +2,17 @@
     <!-- Base application theme. -->
     <style name="Theme.CryptoOverview" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/MainBackground</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <!--        -->
         <!-- Customize your theme here. -->
     </style>
 
@@ -18,8 +20,8 @@
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
     </style>
 
-    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
-    </style>
+    <style name="ThemeOverlay.App.BottomNavigationView" parent=""></style>
+
 
     <style name="MainLayout">
         <item name="android:paddingLeft">@dimen/padding_right_left</item>
@@ -27,9 +29,14 @@
         <item name="android:background">@color/MainBackground</item>
     </style>
 
-    <style name="Header" parent="TextAppearance.MaterialComponents.Headline6"/>
-    <style name="Header.SubHeader" parent="TextAppearance.MaterialComponents.Subtitle2"/>
-    <style name="Body" parent="TextAppearance.MaterialComponents.Body1"/>
+    <style name="Header" parent="TextAppearance.MaterialComponents.Headline6" />
+
+    <style name="Header.SubHeader" parent="TextAppearance.MaterialComponents.Subtitle2" />
+
+    <style name="Body" parent="TextAppearance.MaterialComponents.Body1" />
+
+    <style name="Caption" parent="TextAppearance.MaterialComponents.Caption" />
+
     <style name="SwitcherButton" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:layout_margin">0dp</item>
         <item name="android:gravity">center</item>
