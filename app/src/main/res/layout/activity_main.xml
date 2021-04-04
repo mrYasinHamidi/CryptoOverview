@@ -11,8 +11,8 @@
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/MainBackground"
         android:animateLayoutChanges="true"
+        android:background="@color/MainBackground"
         tools:context=".MainActivity">
 
 
@@ -25,14 +25,63 @@
             app:layout_constraintBottom_toTopOf="@id/main_bottom_navigation"
             app:navGraph="@navigation/navigation" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+        <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/main_bottom_navigation"
-            style="@style/Widget.App.BottomNavigationView"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
+            app:hideOnScroll="true"
+            style="@style/Widget.App.BottomAppBar"
             android:layout_gravity="bottom"
-            app:labelVisibilityMode="selected"
-            app:menu="@menu/main_navigation_menu" />
+            app:contentInsetStart="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/MyBottomNavigationButtons"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_home" />
+
+                <ImageView
+                    style="@style/MyBottomNavigationButtons"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_watch_list" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_watch_list" />
+
+                <ImageView
+                    style="@style/MyBottomNavigationButtons"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_news" />
+
+                <ImageView
+                    style="@style/MyBottomNavigationButtons"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_wallet" />
+            </LinearLayout>
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/main_bottom_navigation"
+            app:srcCompat="@drawable/ic_search" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

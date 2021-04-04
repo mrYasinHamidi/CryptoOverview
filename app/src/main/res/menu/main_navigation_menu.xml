@@ -11,6 +11,10 @@
         android:icon="@drawable/ic_watch_list"
         android:title="@string/text_label_watch_list" />
     <item
+        android:id="@+id/dsdsds"
+        android:enabled="false"
+        android:title="@string/text_label_watch_list" />
+    <item
         android:id="@+id/newsDestination"
         android:enabled="true"
         android:icon="@drawable/ic_news"
