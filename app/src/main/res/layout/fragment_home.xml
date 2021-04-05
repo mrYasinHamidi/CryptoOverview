@@ -10,44 +10,19 @@
             type="com.yasin.cryptooverview.viewModels.HomeViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
         style="@style/MainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            style="@style/Header"
-            refreshStatus="@{viewModel.status}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:gravity="center_horizontal"
-            android:onClick="@{()->viewModel.getData()}"
-            android:paddingTop="8dp"
-            android:paddingBottom="0dp"
-            android:text="@string/try_again" />
-
-        <TextView
-            style="@style/Caption"
-            setLastUpdateText="@{viewModel.status}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
-
-        <ProgressBar
-            progressStatus="@{viewModel.status}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/home_recycler_view"
+            android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:transitionGroup="true"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

@@ -97,4 +97,7 @@ dependencies {
     //date
     implementation 'joda-time:joda-time:2.10.10'
 
+    //status bar editor
+    implementation 'com.github.fede87:StatusBarAlert:1.2.1'
+
 }

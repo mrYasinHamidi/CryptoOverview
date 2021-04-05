@@ -23,7 +23,7 @@ enum class ChartDataInterval(val interval: String) {
 }
 
 enum class CryptoConvert(val convert: String) { USD("USD"), EUR("EUR") }
-enum class RequestStatus { Loading, Complete, Error }
+enum class RequestStatus { NONE, Loading, Complete, Error }
 
 fun List<CryptoApiResponse>.arrayOfCryptoCurrencyTables(): Array<CryptoCurrencyTable> {
     return map {

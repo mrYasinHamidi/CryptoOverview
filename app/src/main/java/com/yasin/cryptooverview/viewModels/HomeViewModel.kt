@@ -1,5 +1,6 @@
 package com.yasin.cryptooverview.viewModels
 
+import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,18 +22,22 @@ class HomeViewModel @Inject constructor(
     val status: LiveData<RequestStatus>
         get() = _status
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String>
-        get() = _errorMessage
-
     init {
         getData()
     }
 
     fun getData() {
-        _status.value = RequestStatus.Loading
-        viewModelScope.launch {
-            _status.postValue(marketRepository.refreshData())
+        if (_status.value != RequestStatus.Loading) {
+            _status.value = RequestStatus.Loading
+            viewModelScope.launch {
+                _status.postValue(marketRepository.refreshData())
+            }
         }
     }
+
+    fun refreshStatus() {
+        _status.value = RequestStatus.NONE
+    }
+
+
 }

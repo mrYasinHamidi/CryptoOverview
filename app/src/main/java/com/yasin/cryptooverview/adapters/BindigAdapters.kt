@@ -1,5 +1,6 @@
 package com.yasin.cryptooverview.adapters
 
+import android.app.Activity
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.graphics.Color
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.*
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.fede987.statusbaralert.StatusBarAlert
 import com.google.android.material.snackbar.Snackbar
 import com.yasin.cryptooverview.ChartDataInterval
 import com.yasin.cryptooverview.R
@@ -79,6 +81,7 @@ fun ProgressBar.bindProgressBar(status: RequestStatus) {
                 .putLong("time", Calendar.getInstance().time.time).apply()
             View.GONE
         }
+        else -> {View.GONE}
     }
 }
 
@@ -115,6 +118,7 @@ fun ProgressBar.chartBindProgressBar(status: RequestStatus) {
         RequestStatus.Loading -> View.VISIBLE
         RequestStatus.Error -> View.GONE
         RequestStatus.Complete -> View.GONE
+        else -> View.GONE
     }
 }
 
@@ -124,6 +128,7 @@ fun View.bindChart(status: RequestStatus) {
         RequestStatus.Loading -> View.GONE
         RequestStatus.Error -> View.VISIBLE
         RequestStatus.Complete -> View.VISIBLE
+        else -> View.GONE
     }
 }
 
