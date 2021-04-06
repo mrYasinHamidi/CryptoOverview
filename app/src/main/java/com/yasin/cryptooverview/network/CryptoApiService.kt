@@ -26,5 +26,10 @@ interface CryptoApiService {
         @Query("quoteId") baseAsset: String ,
     ): Deferred<ChartApiResponse>
 
+    @GET("assets")
+    fun search(
+        @Query("search") name: String
+    ): Deferred<SearchApiResponse>
+
 
 }

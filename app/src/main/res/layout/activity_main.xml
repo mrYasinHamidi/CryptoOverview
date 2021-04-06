@@ -82,6 +82,7 @@
             android:layout_height="wrap_content"
             app:layout_anchor="@id/main_bottom_navigation"
             app:srcCompat="@drawable/ic_search"
+            android:transitionName="search"
             android:id="@+id/fab"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

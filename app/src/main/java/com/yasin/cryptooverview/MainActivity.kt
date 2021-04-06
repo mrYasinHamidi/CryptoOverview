@@ -27,13 +27,20 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
         val navController = navHostFragment.navController
-        binding.mainBottomNavigation.setupWithNavController(navController)
+
+// Set a custom animation for showing and hiding the FAB
+        binding.fab.apply {
+            setShowMotionSpecResource(R.animator.fab_show)
+            setHideMotionSpecResource(R.animator.fab_hide)
+
+        }
+
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            if (destination.id == R.id.detail || destination.id == R.id.chartFragment)
-                binding.mainBottomNavigation.visibility = View.GONE
+            if (destination.id == R.id.detail || destination.id == R.id.chartFragment || destination.id == R.id.searchFragment)
+                binding.mainBottomNavigation.performHide()
             else
-                binding.mainBottomNavigation.visibility = View.VISIBLE
+                binding.mainBottomNavigation.performShow()
 
         }
 

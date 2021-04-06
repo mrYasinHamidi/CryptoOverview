@@ -5,6 +5,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.fede987.statusbaralert.StatusBarAlert
 import com.fede987.statusbaralert.StatusBarAlertView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -98,6 +100,12 @@ class HomeFragment : Fragment() {
 
         })
 
+        requireActivity().findViewById<FloatingActionButton>(R.id.fab).apply {
+            setImageResource(R.drawable.ic_search)
+            setOnClickListener {
+                requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeDestination_to_searchFragment)
+            }
+        }
     }
 
 

@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.github.mikephil.charting.charts.CandleStickChart
@@ -25,6 +26,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.transition.MaterialContainerTransform
 import com.yasin.cryptooverview.ChartDataInterval
 import com.yasin.cryptooverview.R
@@ -43,6 +45,7 @@ class DetailFragment : Fragment() {
 
     private val viewModel: DetailViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
+
     private lateinit var binding: FragmentDetailBinding
     private lateinit var chart: CandleStickChart
 
@@ -54,9 +57,9 @@ class DetailFragment : Fragment() {
             scrimColor = Color.TRANSPARENT
             setAllContainerColors(Color.TRANSPARENT)
 
-            viewModel.cryptoCurrency.value = args.CryptoCurrency
         }
 
+        viewModel.cryptoCurrency.value = args.CryptoCurrency
     }
 
     override fun onCreateView(
@@ -117,6 +120,12 @@ class DetailFragment : Fragment() {
 
 
         })
+        requireActivity().findViewById<FloatingActionButton>(R.id.fab).apply {
+            setImageResource(R.drawable.ic_watch_list)
+            setOnClickListener {
+                Toast.makeText(context, "added", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun chartConfig(chart: CandleStickChart) {

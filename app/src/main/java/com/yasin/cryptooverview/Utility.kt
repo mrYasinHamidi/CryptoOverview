@@ -4,6 +4,7 @@ import com.github.mikephil.charting.data.CandleEntry
 import com.yasin.cryptooverview.database.CryptoCurrencyTable
 import com.yasin.cryptooverview.models.Candle
 import com.yasin.cryptooverview.models.CryptoCurrency
+import com.yasin.cryptooverview.models.SearchResponse
 import com.yasin.cryptooverview.network.CryptoApiResponse
 
 class CryptoConstants {
@@ -65,6 +66,27 @@ fun List<CryptoCurrencyTable>.listOfCryptoCurrencies(): List<CryptoCurrency> {
     }
 }
 
+fun List<SearchResponse>.toListOfCryptoCurrencies(): List<CryptoCurrency> {
+    return map {
+        CryptoCurrency(
+            rank = it.rank?.toInt() ?: 0,
+            name = it.name ?: "",
+            symbol = it.symbol ?: "",
+            price = it.priceUsd ?: "",
+            high = "",
+            logoUrl = "",
+            marketCap = it.marketCapUsd ?: "",
+            maxSupply = it.maxSupply ?: "",
+            circulatingSupply = it.supply ?: "",
+            priceChangeDaily = it.changePercent24Hr ?: "",
+            priceChangeWeakly = "",
+            priceChangeMonthly = "",
+            priceChangeYearly = ""
+        )
+    }
+}
+
+
 fun <E> List<E>.getRange(range: IntProgression): MutableList<E> {
     val a = mutableListOf<E>()
 
@@ -84,5 +106,7 @@ fun List<Candle>.toCandleEntry() = if (isNotEmpty()) mapIndexed { index, candle 
         candle.close?.toFloat() ?: 0F
     )
 } else null
+
+
 
 
