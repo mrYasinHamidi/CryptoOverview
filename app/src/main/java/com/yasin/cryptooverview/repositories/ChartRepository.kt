@@ -1,14 +1,15 @@
 package com.yasin.cryptooverview.repositories
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.yasin.cryptooverview.ChartDataInterval
 import com.yasin.cryptooverview.RequestStatus
+import com.yasin.cryptooverview.database.CryptoDatabase
 import com.yasin.cryptooverview.di.NetworkModule
 import com.yasin.cryptooverview.models.Candle
 import com.yasin.cryptooverview.models.CryptoCurrency
-import com.yasin.cryptooverview.models.SearchResponse
 import com.yasin.cryptooverview.network.CryptoApiService
-import com.yasin.cryptooverview.network.SearchApiResponse
 import com.yasin.cryptooverview.toListOfCryptoCurrencies
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -16,10 +17,32 @@ import javax.inject.Inject
 
 
 class ChartRepository @Inject constructor(
-    @NetworkModule.CoinCap val service: CryptoApiService
+    @NetworkModule.CoinCap val service: CryptoApiService,
+    val data: CryptoDatabase
 ) {
 
-    suspend fun getChartData(
+
+    suspend fun getCurrency(name: String) =
+        withContext(Dispatchers.IO) {
+            val cryptoCurrencyTable = data.cryptoDao.get(name)
+            CryptoCurrency(
+                rank = cryptoCurrencyTable.rank ?: 0,
+                name = cryptoCurrencyTable.name,
+                symbol = cryptoCurrencyTable.symbol,
+                price = cryptoCurrencyTable.price,
+                high = cryptoCurrencyTable.logoUrl,
+                logoUrl = cryptoCurrencyTable.logoUrl,
+                marketCap = cryptoCurrencyTable.marketCap,
+                maxSupply = cryptoCurrencyTable.maxSupply,
+                circulatingSupply = cryptoCurrencyTable.circulatingSupply,
+                priceChangeDaily = cryptoCurrencyTable.priceChangeDaily,
+                priceChangeWeakly = cryptoCurrencyTable.priceChangeWeakly,
+                priceChangeMonthly = cryptoCurrencyTable.priceChangeMonthly,
+                priceChangeYearly = cryptoCurrencyTable.priceChangeYearly
+            )
+        }
+
+    suspend fun refreshChartData(
         baseAssetId: String,
         targetAssetId: String,
         targetExchangeId: String,
@@ -27,9 +50,9 @@ class ChartRepository @Inject constructor(
         status: (RequestStatus) -> Unit
     ) =
         withContext(Dispatchers.IO) {
-            var chartData: List<Candle>? = null
+            var candleList: List<Candle>? = null
             try {
-                chartData = service.getChartDataForCryptoCurrencies(
+                candleList = service.getChartDataForCryptoCurrencies(
                     exchange = targetExchangeId,
                     interval = interval.interval,
                     targetAsset = targetAssetId,
@@ -38,9 +61,8 @@ class ChartRepository @Inject constructor(
                 status(RequestStatus.Complete)
             } catch (e: Exception) {
                 status(RequestStatus.Error)
-                Log.i("aaaChartRepository", e.message.toString())
             }
-            return@withContext chartData
+            candleList
         }
 
 
@@ -55,7 +77,6 @@ class ChartRepository @Inject constructor(
                 status(RequestStatus.Complete)
             } catch (e: Exception) {
                 status(RequestStatus.Error)
-                Log.i("aaaChartRepository", e.message.toString())
             }
             return@withContext searchResponse
         }

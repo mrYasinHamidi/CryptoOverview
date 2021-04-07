@@ -18,7 +18,10 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(private val repository: ChartRepository) : ViewModel() {
 
-    val cryptoCurrency = MutableLiveData<CryptoCurrency>()
+
+    private val _currency = MutableLiveData<CryptoCurrency>()
+    val currency: LiveData<CryptoCurrency>
+        get() = _currency
 
     private val _chartData = MutableLiveData<List<Candle>>()
     val chartData: LiveData<List<Candle>>
@@ -28,29 +31,32 @@ class DetailViewModel @Inject constructor(private val repository: ChartRepositor
     val requestStatus: LiveData<RequestStatus>
         get() = _requestStatus
 
+    init {
+        _requestStatus.value = RequestStatus.NONE
+    }
 
-
-    fun getChartData(interval: ChartDataInterval) {
-        _requestStatus.value = RequestStatus.Loading
+    fun setCurrencyName(name: String) {
         viewModelScope.launch {
-            repository.getChartData(
-                "tether",
-                cryptoCurrency.value?.name?.toLowerCase()?.replace(" ", "-") ?: "",
-                "binance",
-                interval
-            ) { _requestStatus.postValue(it) }?.let {
-                _chartData.postValue(it)
-            }
-
+            _currency.postValue(repository.getCurrency(name))
         }
     }
 
-    fun getCandle(x: Float) =
-        try {
-            _chartData.value?.get(x.toInt())
-        } catch (e: Exception) {
-            null
+    fun prepareChartData(
+        base: String,
+        target: String,
+        exchange: String,
+        interval: ChartDataInterval
+    ) {
+        _requestStatus.value = RequestStatus.Loading
+        viewModelScope.launch {
+            val candleList: List<Candle>? =
+                repository.refreshChartData(base, target.toLowerCase(), exchange, interval) {
+                    _requestStatus.postValue(it)
+                }
+            candleList?.let {
+                _chartData.postValue(it)
+            }
         }
-
+    }
 
 }

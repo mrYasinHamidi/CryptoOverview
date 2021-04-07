@@ -47,8 +47,8 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 }
 
 @BindingAdapter("setColoredPrice")
-fun TextView.bindText(value: String) {
-    if (value.isNotEmpty()) {
+fun TextView.bindText(value: String?) {
+    if (!value.isNullOrEmpty()) {
 
         val price = value.toDouble()
 

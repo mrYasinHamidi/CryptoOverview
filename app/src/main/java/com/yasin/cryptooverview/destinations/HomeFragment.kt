@@ -103,7 +103,8 @@ class HomeFragment : Fragment() {
         requireActivity().findViewById<FloatingActionButton>(R.id.fab).apply {
             setImageResource(R.drawable.ic_search)
             setOnClickListener {
-                requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeDestination_to_searchFragment)
+                requireActivity().findNavController(R.id.nav_host_fragment)
+                    .navigate(R.id.action_homeDestination_to_searchFragment)
             }
         }
     }
@@ -120,14 +121,13 @@ class HomeFragment : Fragment() {
             .build()
 
 
-}
-
-private fun createOnClickListener(
-    cryptoCurrency: CryptoCurrency
-): View.OnClickListener {
-    return View.OnClickListener {
-        val directions = HomeFragmentDirections.actionHomeDestinationToDetail(cryptoCurrency)
-        val extras = FragmentNavigatorExtras(it to "yasin")
-        it.findNavController().navigate(directions, extras)
+    private fun createOnClickListener(
+        cryptoCurrency: CryptoCurrency
+    ): View.OnClickListener {
+        return View.OnClickListener {
+            val directions = HomeFragmentDirections.actionHomeDestinationToDetail(cryptoCurrency.symbol)
+            val extras = FragmentNavigatorExtras(it to "yasin")
+            it.findNavController().navigate(directions, extras)
+        }
     }
 }

@@ -29,7 +29,7 @@
 
                 <ImageView
                     android:id="@+id/detail_logo"
-                    imageUrl="@{viewModel.cryptoCurrency.logoUrl}"
+                    imageUrl="@{viewModel.currency.logoUrl}"
                     android:layout_width="@dimen/logo_width_height"
                     android:layout_height="@dimen/logo_width_height"
                     android:layout_marginTop="@dimen/margin_between_objects"
@@ -44,7 +44,7 @@
                     android:layout_marginStart="@dimen/margin_between_objects"
                     android:layout_marginLeft="@dimen/margin_between_objects"
                     android:layout_marginTop="2dp"
-                    android:text="@{viewModel.cryptoCurrency.name}"
+                    android:text="@{viewModel.currency.name}"
                     app:layout_constraintStart_toEndOf="@+id/detail_logo"
                     app:layout_constraintTop_toTopOf="@+id/detail_logo" />
 
@@ -56,7 +56,7 @@
                     android:layout_marginStart="@dimen/margin_between_objects"
                     android:layout_marginLeft="@dimen/margin_between_objects"
                     android:layout_marginBottom="2dp"
-                    android:text="@{viewModel.cryptoCurrency.symbol}"
+                    android:text="@{viewModel.currency.symbol}"
                     app:layout_constraintBottom_toBottomOf="@+id/detail_logo"
                     app:layout_constraintStart_toEndOf="@+id/detail_logo" />
 
@@ -77,7 +77,7 @@
                     style="@style/Header.SubHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.cryptoCurrency.price}"
+                    android:text="@{viewModel.currency.price}"
                     app:layout_constraintBottom_toBottomOf="@+id/detail_logo"
                     app:layout_constraintEnd_toEndOf="@+id/detail_close_icon" />
 
@@ -87,9 +87,9 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="@dimen/margin_between_objects"
                     android:elevation="16dp"
+                    app:cardBackgroundColor="@color/MainItemsBackground"
                     app:cardCornerRadius="@dimen/chart_corner_radius"
                     app:layout_constraintDimensionRatio="w,4:7"
-                    app:cardBackgroundColor="@color/MainItemsBackground"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_logo">
@@ -222,7 +222,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/text_top_margin"
                     android:layout_marginRight="@dimen/text_left_right_margin"
-                    android:text="@{viewModel.cryptoCurrency.marketCap}"
+                    android:text="@{viewModel.currency.marketCap}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/switcher_card" />
 
@@ -233,7 +233,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/text_top_margin"
                     android:layout_marginRight="@dimen/text_left_right_margin"
-                    android:text="@{viewModel.cryptoCurrency.circulatingSupply}"
+                    android:text="@{viewModel.currency.circulatingSupply}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -244,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/text_top_margin"
                     android:layout_marginRight="@dimen/text_left_right_margin"
-                    android:text="@{viewModel.cryptoCurrency.maxSupply}"
+                    android:text="@{viewModel.currency.maxSupply}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -257,7 +257,7 @@
                     android:layout_marginRight="@dimen/text_left_right_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView12"
-                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeDaily}" />
+                    app:setColoredPrice="@{viewModel.currency.priceChangeDaily}" />
 
                 <TextView
                     android:id="@+id/textView15"
@@ -268,7 +268,7 @@
                     android:layout_marginRight="@dimen/text_left_right_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView14"
-                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeWeakly}" />
+                    app:setColoredPrice="@{viewModel.currency.priceChangeWeakly}" />
 
                 <TextView
                     android:id="@+id/textView16"
@@ -279,7 +279,7 @@
                     android:layout_marginRight="@dimen/text_left_right_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView15"
-                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeMonthly}" />
+                    app:setColoredPrice="@{viewModel.currency.priceChangeMonthly}" />
 
                 <TextView
                     android:id="@+id/textView17"
@@ -290,7 +290,7 @@
                     android:layout_marginRight="@dimen/text_left_right_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView16"
-                    app:setColoredPrice="@{viewModel.cryptoCurrency.priceChangeYearly}" />
+                    app:setColoredPrice="@{viewModel.currency.priceChangeYearly}" />
 
                 <ImageView
                     android:id="@+id/imageView4"

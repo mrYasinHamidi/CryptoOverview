@@ -13,19 +13,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.github.mikephil.charting.charts.CandleStickChart
-import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.YAxis.AxisDependency
 import com.github.mikephil.charting.data.CandleData
 import com.github.mikephil.charting.data.CandleDataSet
 import com.github.mikephil.charting.data.CandleEntry
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.highlight.Highlight
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.transition.MaterialContainerTransform
 import com.yasin.cryptooverview.ChartDataInterval
@@ -33,12 +27,9 @@ import com.yasin.cryptooverview.R
 import com.yasin.cryptooverview.databinding.FragmentDetailBinding
 import com.yasin.cryptooverview.getRange
 import com.yasin.cryptooverview.listeners.SwitcherItemsClickListener
-import com.yasin.cryptooverview.models.Candle
 import com.yasin.cryptooverview.toCandleEntry
 import com.yasin.cryptooverview.viewModels.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
-import kotlin.math.max
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -59,7 +50,6 @@ class DetailFragment : Fragment() {
 
         }
 
-        viewModel.cryptoCurrency.value = args.CryptoCurrency
     }
 
     override fun onCreateView(
@@ -68,9 +58,6 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
-
-//        activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navigation)?.visibility =
-//            View.GONE
 
         ViewCompat.setTransitionName(binding.layoutMainDetail, "yasin")
 
@@ -84,22 +71,26 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //get associated currency
+        viewModel.setCurrencyName(args.name)
+
         chart = binding.detailChart
 
         chartConfig(chart)
+        viewModel.currency.observe(viewLifecycleOwner, Observer {
+            viewModel.prepareChartData("tether",it.name,"binance",ChartDataInterval.D1)
 
-        if (viewModel.chartData.value == null) {
-            viewModel.getChartData(ChartDataInterval.D1)
-        }
+        })
+
 
         binding.switcher.addSwitcherItemClickListener(
             SwitcherItemsClickListener(
-                clickOn1h = { viewModel.getChartData(ChartDataInterval.H1) },
-                clickOn2h = { viewModel.getChartData(ChartDataInterval.H2) },
-                clickOn4h = { viewModel.getChartData(ChartDataInterval.H4) },
-                clickOn8h = { viewModel.getChartData(ChartDataInterval.H8) },
-                clickOn1d = { viewModel.getChartData(ChartDataInterval.D1) },
-                clickOn1w = { viewModel.getChartData(ChartDataInterval.W1) })
+                clickOn1h = { viewModel.prepareChartData("tether",viewModel.currency.value?.name?:"","binance",ChartDataInterval.H1) },
+                clickOn2h = { viewModel.prepareChartData("tether",viewModel.currency.value?.name?:"","binance",ChartDataInterval.H2) },
+                clickOn4h = { viewModel.prepareChartData("tether",viewModel.currency.value?.name?:"","binance",ChartDataInterval.H4) },
+                clickOn8h = { viewModel.prepareChartData("tether",viewModel.currency.value?.name?:"","binance",ChartDataInterval.H8) },
+                clickOn1d = { viewModel.prepareChartData("tether",viewModel.currency.value?.name?:"","binance",ChartDataInterval.D1) },
+                clickOn1w = { viewModel.prepareChartData("tether",viewModel.currency.value?.name?:"","binance",ChartDataInterval.W1) })
         )
 
 
@@ -147,29 +138,6 @@ class DetailFragment : Fragment() {
         chart.axisRight.isEnabled = false
         chart.xAxis.isEnabled = false
 
-        chart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
-            override fun onValueSelected(e: Entry?, h: Highlight?) {
-                val candle: Candle? = e?.let {
-                    viewModel.getCandle(it.x)
-                }
-
-                candle?.let {
-
-                    val period = candle.period
-
-                    period?.let {
-                        val date = Date(period)
-                        chart.description.text = "$candle \n"
-                        chart.description.text += "$date"
-
-                    }
-
-                }
-            }
-
-            override fun onNothingSelected() {
-            }
-        })
     }
 
     private fun CandleStickChart.setChartData(dataList: List<CandleEntry>, range: IntProgression) {
@@ -199,9 +167,4 @@ class DetailFragment : Fragment() {
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-//        activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navigation)?.visibility =
-//            View.VISIBLE
-    }
 }

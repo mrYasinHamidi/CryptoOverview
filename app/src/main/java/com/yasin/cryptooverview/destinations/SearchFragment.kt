@@ -77,7 +77,7 @@ class SearchFragment : Fragment() {
         cryptoCurrency: CryptoCurrency
     ): View.OnClickListener {
         return View.OnClickListener {
-            val directions = SearchFragmentDirections.actionSearchFragmentToDetail(cryptoCurrency)
+            val directions = SearchFragmentDirections.actionSearchFragmentToDetail(cryptoCurrency.symbol)
             val extras = FragmentNavigatorExtras(it to "yasin")
             it.findNavController().navigate(directions, extras)
         }

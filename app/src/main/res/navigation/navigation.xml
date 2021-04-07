@@ -9,7 +9,7 @@
         android:id="@+id/homeDestination"
         android:name="com.yasin.cryptooverview.destinations.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeDestination_to_detail"
             app:destination="@id/detail" />
@@ -35,18 +35,19 @@
     <fragment
         android:id="@+id/detail"
         android:name="com.yasin.cryptooverview.destinations.DetailFragment"
-        android:label="Detail" >
-        <argument
-            android:name="CryptoCurrency"
-            app:argType="com.yasin.cryptooverview.models.CryptoCurrency" />
+        android:label="Detail">
         <action
             android:id="@+id/action_detail_to_chartFragment"
             app:destination="@id/chartFragment" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            />
     </fragment>
     <fragment
         android:id="@+id/chartFragment"
         android:name="com.yasin.cryptooverview.destinations.ChartFragment"
-        android:label="ChartFragment" >
+        android:label="ChartFragment">
         <argument
             android:name="Candels"
             app:argType="com.yasin.cryptooverview.models.Candle[]" />
@@ -54,7 +55,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.yasin.cryptooverview.destinations.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="SearchFragment">
         <action
             android:id="@+id/action_searchFragment_to_detail"
             app:destination="@id/detail" />
