@@ -29,9 +29,14 @@
         <item name="android:background">@color/MainBackground</item>
     </style>
 
-    <style name="Header" parent="TextAppearance.MaterialComponents.Headline6" />
+    <style name="Header" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:color">@color/colorOnPrimary</item>
 
-    <style name="Header.SubHeader" parent="TextAppearance.MaterialComponents.Subtitle2" />
+    </style>
+
+    <style name="Header.SubHeader" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:color">@color/colorOnPrimary</item>
+    </style>
 
     <style name="Body" parent="TextAppearance.MaterialComponents.Body1" />
 
@@ -46,6 +51,8 @@
         <item name="android:paddingLeft">6dp</item>
         <item name="android:paddingRight">6dp</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:color">@color/colorOnPrimary</item>
+
     </style>
 
     <style name="MyBottomNavigationButtons">
