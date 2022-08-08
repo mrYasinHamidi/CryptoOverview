@@ -1,11 +1,10 @@
 # CryptoOverview
-Crypto Currency Market Over View
+An application that shows you an overview of the cryptocurrency market.
 
-
-# Table of contents
-* [General info](#general-info)
-* [Technologies](#technologies)
-* [Screenshots](#screenshots)
+| | |
+|:---:|:---:|
+|![Screenshot_20220717_144446](./screenshots/screen1.png)|![Screenshot_20220717_144257](./screenshots/screen2.png)|
+|![Screenshot_20220717_144336](./screenshots/screen3.png)|![Screenshot_20220717_144509](./screenshots/screen4.png)|
 
 # General info
 List of all Crypto Currncies with chart.  
@@ -16,7 +15,7 @@ I tried to use new approaches and best practices in android development, such as
 * Using Kotlin insted of Java
 * Dependency Injection
 
-It is a practice project to improve my knowledge.
+**It is a practice project to improve my knowledge.**
 
 # Technologies
 
@@ -24,12 +23,3 @@ It is a practice project to improve my knowledge.
 * Room Database
 * Retrofit
 * Hilt
-
-
-# Screenshots
-
-
-| | |
-|:---:|:---:|
-|![Screenshot_20220717_144446](./screenshots/screen1.png)|![Screenshot_20220717_144257](./screenshots/screen2.png)|
-|![Screenshot_20220717_144336](./screenshots/screen3.png)|![Screenshot_20220717_144509](./screenshots/screen4.png)|
