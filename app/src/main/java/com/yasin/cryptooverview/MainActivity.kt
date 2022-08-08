@@ -1,20 +1,12 @@
 package com.yasin.cryptooverview
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.graphics.Color
 import android.os.Bundle
-import android.transition.Visibility
-import android.view.View
-import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.yasin.cryptooverview.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 
 @AndroidEntryPoint
