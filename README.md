@@ -10,9 +10,10 @@ An application that shows you an overview of the cryptocurrency market.
 List of all Crypto Currncies with chart.  
 I tried to use new approaches and best practices in android development, such as :
 
-* Using jetpack libraies
-* Using MVVM pattern
-* Using Kotlin insted of Java
+* Jetpack libraies
+* Kotlin
+* Coroutines
+* MVVM pattern
 * Dependency Injection
 
 **It is a practice project to improve my knowledge.**
