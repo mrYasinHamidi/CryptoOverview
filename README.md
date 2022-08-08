@@ -20,7 +20,10 @@ I tried to use new approaches and best practices in android development, such as
 
 # Technologies
 
-* Kotlin 
-* Room Database
-* Retrofit
-* Hilt
+* Kotlin 1.4
+* Room Database 2.2
+* Retrofit 2.9
+* Hilt 2.3 beta (Dependency injection based on Dagger)
+* Navigation 2.3
+* Lifecycle 2.3
+* Glide 4 (Remote image loader)
