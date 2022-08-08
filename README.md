@@ -8,15 +8,20 @@ Crypto Currency Market Over View
 * [Screenshots](#screenshots)
 
 # General info
-List of all Crypto Currncies with candle chart.
-this project is practical project that i worked on for submitting the knowledg that i getting from cources.
+List of all Crypto Currncies with chart.  
+I tried to use new approaches and best practices in android development, such as :
 
+* Using jetpack libraies
+* Using MVVM pattern
+* Using Kotlin insted of Java
+* Dependency Injection
+
+It is a practice project to improve my knowledge.
 
 # Technologies
 
 * Kotlin 
 * Room Database
-* MVVM pattern
 * Retrofit
 * Hilt
 
