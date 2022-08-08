@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val navController = navHostFragment.navController
 
-// Set a custom animation for showing and hiding the FAB
+        // Set a custom animation for showing and hiding the FAB
         binding.fab.apply {
             setShowMotionSpecResource(R.animator.fab_show)
             setHideMotionSpecResource(R.animator.fab_hide)
